@@ -21,3 +21,8 @@ projetos acadêmicos e até mesmo futuras oportunidades profissionais.
 </div>
 
 Design das Wireframes (FIGMA): <a href="https://www.figma.com/file/vdgJqeTlBXJYXx35ed9ZYC/Match-App?type=design&node-id=0%3A1&t=2QPbog0MAznD5Xv0-1">Clique aqui</a> 🟢
+
+Repositório Principal API: <a href="https://github.com/Juanpi92/api_uva_match">Clique aqui</a> 🟢
+
+Repositório Principal FRONT: <a href="https://github.com/plfmoura/match-app">Clique aqui</a> 🟢
+
