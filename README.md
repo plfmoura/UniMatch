@@ -19,3 +19,5 @@ pessoas com interesses semelhantes, os usuários podem encontrar parceiros para
 projetos acadêmicos e até mesmo futuras oportunidades profissionais. 
   
 </div>
+
+Design das Wireframes (FIGMA): <a href="https://www.figma.com/file/vdgJqeTlBXJYXx35ed9ZYC/Match-App?type=design&node-id=0%3A1&t=2QPbog0MAznD5Xv0-1">Clique aqui</a> 🟢
