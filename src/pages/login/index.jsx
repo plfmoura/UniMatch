@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import AppLogo from '../../components/AppLogo'
 import AuthenticateSMS from './AuthenticateSMS'
 import Register from './register'
+import Loading from "../../components/Loading/index"
 
 export default function Login() {
     const [initialState, setInitialState] = useState(true)
@@ -11,9 +12,10 @@ export default function Login() {
     }
 
     return (
+        <>
+        <Loading></Loading>
         <div className='Login-container' style={options.container}>
             <div style={options.logo_container}>
-                <AppLogo objectScale={"1.2"} objectName={true} />
             </div>
             {initialState ?
                 <Register
@@ -24,6 +26,7 @@ export default function Login() {
                     onBack={() => setInitialState(true)} />
             }
         </div>
+        </>
     )
 }
 
