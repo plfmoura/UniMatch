@@ -42,5 +42,5 @@
 }
 
 .words-gray {
-    color: #454545;
+    color: var(--accent-word-color);
 }
