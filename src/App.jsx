@@ -1,4 +1,6 @@
+import { HashRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
+import Login from './pages/login'
 
 function App() {
   const options = {
@@ -9,9 +11,11 @@ function App() {
   }
 
   return (
-    <div style={options.container}>
-      <p>Match App</p>
-    </div>
+    <HashRouter>
+      <Routes>
+        <Route exact path="/" element={<Login />}></Route>
+      </Routes>
+    </HashRouter>
   )
 }
 
