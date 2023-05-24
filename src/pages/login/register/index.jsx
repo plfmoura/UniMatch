@@ -6,7 +6,7 @@ export default function Register({onPress}) {
     return (
         <div className='Register-container'>
             <div className='register-title'>
-                <h2>Encontre suas <span>primeiras<br />conexões</span> acadêmicas</h2>
+                <h2>Encontre suas <span class="words-gray">primeiras<br />conexões</span> acadêmicas</h2>
                 <h4>Junte-se a centenas de<br />estudantes e socialize!</h4>
             </div>
             <nav className='register-btn-navigation'>

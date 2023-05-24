@@ -40,3 +40,7 @@
 .register-btn-navigation a {
     cursor: pointer;
 }
+
+.words-gray {
+    color: #454545;
+}
