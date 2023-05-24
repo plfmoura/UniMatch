@@ -3,10 +3,8 @@ import AppLogo from '../AppLogo'
 import './loading.css'
 export default function Loading() {
   return (
-    <div className="loadingFullscreenWall">
-        <div className="centerLogoPlace">  
-        <AppLogo></AppLogo>
-        </div>
+    <div className="loading-container">
+        <AppLogo />
     </div>
   )
 }

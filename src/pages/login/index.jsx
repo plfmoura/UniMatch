@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import AppLogo from '../../components/AppLogo'
 import AuthenticateSMS from './AuthenticateSMS'
-import Register from './register'
-import Loading from "../../components/Loading/index"
+import AppLogo from '../../components/AppLogo'
+import Lobby from './Lobby'
 
 export default function Login() {
     const [initialState, setInitialState] = useState(true)
@@ -13,19 +12,19 @@ export default function Login() {
 
     return (
         <>
-        <Loading></Loading>
-        <div className='Login-container' style={options.container}>
-            <div style={options.logo_container}>
+            <div className='Login-container' style={options.container}>
+                <div style={options.logo_container}>
+                    <AppLogo objectName={true} />
+                </div>
+                {initialState ?
+                    <Lobby
+                        onPress={() => setInitialState(false)} />
+                    :
+                    <AuthenticateSMS
+                        onPress={handleSubmit}
+                        onBack={() => setInitialState(true)} />
+                }
             </div>
-            {initialState ?
-                <Register
-                    onPress={() => setInitialState(false)} />
-                :
-                <AuthenticateSMS
-                    onPress={handleSubmit}
-                    onBack={() => setInitialState(true)} />
-            }
-        </div>
         </>
     )
 }
