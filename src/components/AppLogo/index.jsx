@@ -1,9 +1,10 @@
 import React from 'react'
 import logo from '../../../public/vite.svg'
+import './appLogo.css'
 
-export default function AppLogo({ objectScale, objectName }) {
+export default function AppLogo({ objectScale, objectName, animation }) {
   let scale = objectScale ? objectScale : "1"
-  
+
   const options = {
     container: {
       display: 'flex',
@@ -24,7 +25,11 @@ export default function AppLogo({ objectScale, objectName }) {
 
   return (
     <div style={options.container}>
-      <img src={logo} alt="Logo do aplicativo" style={options.logo} />
+      <img
+        src={logo}
+        alt="Logo do aplicativo"
+        style={options.logo}
+        className={animation ? 'logo-animation' : null} />
       {objectName ? <span style={options.text}>Match App</span> : null}
     </div>
   )

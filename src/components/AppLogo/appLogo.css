@@ -1,0 +1,12 @@
+.logo-animation {
+    animation: spin 2s cubic-bezier(0.47, 0, 0.745, 0.715) infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotateY(0deg) scale(2);
+    }
+    to {
+        transform: rotateY(-360deg) scale(2);
+    }
+}

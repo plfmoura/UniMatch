@@ -2,16 +2,22 @@ import React, { useState } from 'react'
 import AuthenticateSMS from './AuthenticateSMS'
 import AppLogo from '../../components/AppLogo'
 import Lobby from './Lobby'
+import Loading from '../../components/Loading'
 
 export default function Login() {
     const [initialState, setInitialState] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleSubmit = () => {
-        alert("SMS enviado!")
+        setIsLoading(true)
+        setTimeout(() => {
+            setIsLoading(false)
+        }, [2000])
     }
 
     return (
         <>
+            {isLoading && <Loading />}
             <div className='Login-container' style={options.container}>
                 <div style={options.logo_container}>
                     <AppLogo objectName={true} />
