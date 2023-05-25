@@ -1,17 +1,45 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-.descriptionRegister {
-    height: 65px;
-    width: 246px;
-    left: 15px;
-    top: 174px;
-    border-radius: 0px;
-    text-align: center;
+.Register-container{
+    position:flex;
+    align-items: center;
+    justify-content: center;
+    height: 200%;
+    width: 50%;
+    max-width: 200px;
 }
+.descriptionRegister {
+    display: flex;
+    flex-direction: column;
+    padding-block-end: 43px;
+    line-height: 22px;
+    text-align: center;
+       
+  }
 
 .description {
     font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    font-weight: 580;
-    letter-spacing: -0.05em;
+    font-size: 15px;
+    font-weight: 540;
+    letter-spacing: -0.01em;
 }
+
+
+.inputTransparent {
+    z-index: 0; 
+    display: block;
+    position:flex;
+    align-items: center;
+
+    font-family: 'Inter', sans-serif;
+    width: 100%;
+    margin-top: 40px;
+    border: 0;
+    border-bottom: 1px solid #454545;
+    outline: 0;
+    font-size: 0.8rem;
+    text-align: center;
+    color: white;
+    padding: 3px 0;
+    background: transparent;
+ }
