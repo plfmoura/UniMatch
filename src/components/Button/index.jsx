@@ -13,6 +13,6 @@ export default function Button({ onPress, text, type, pad, variant }) {
 // - primary - secondary - default
 
 return (
-    <input type={type ? type : "btn"} style={options.style} value={text ? text : "Meu botão"} onClick={onPress} className={"default-btn " + variant} />
+    <input type={type ? type : "btn"} style={options.style} readOnly value={text ? text : "Meu botão"} onClick={onPress && onPress} className={"default-btn " + variant} />
 )
 }
