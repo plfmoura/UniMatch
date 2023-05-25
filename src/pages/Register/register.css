@@ -1,45 +1,67 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-.Register-container{
-    position:flex;
+.Register-container {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 200%;
-    width: 50%;
-    max-width: 200px;
+    justify-content: space-evenly;
+    height: 100vh;
+    width: 100vw;
+
 }
+
+.formRegister {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+}
+
+
 .descriptionRegister {
     display: flex;
     flex-direction: column;
-    padding-block-end: 43px;
-    line-height: 22px;
     text-align: center;
-       
-  }
+    width: 90%;
+}
 
 .description {
     font-family: 'Inter', sans-serif;
-    font-size: 15px;
+    font-size: 19px;
     font-weight: 540;
     letter-spacing: -0.01em;
 }
 
+.description:last-of-type {
+    font-size: 16px;
+    font-weight: 300;
+    margin-top: 2rem;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    width: 55%;
+    margin-bottom: 2rem;
+}
+
+.inputFile {
+    height: 265px;
+    background-color: #454545;
+
+}
+
 
 .inputTransparent {
-    z-index: 0; 
-    display: block;
-    position:flex;
-    align-items: center;
-
     font-family: 'Inter', sans-serif;
     width: 100%;
-    margin-top: 40px;
     border: 0;
     border-bottom: 1px solid #454545;
     outline: 0;
-    font-size: 0.8rem;
+    font-size: 18px;
     text-align: center;
     color: white;
     padding: 3px 0;
     background: transparent;
- }
+}
