@@ -70,7 +70,7 @@ export default function AuthenticateSMS({ onPress, onBack, onNavigate }) {
                                 que ele receberá um código via telefone para efetuar o cadastro.
                                 Mensagem informado ao usuário que ele receberá um código via telefone
                                 para efetuar o cadastro.</p>
-                            <Button text={"Enviar Código"} type={"submit"} pad={"1.5rem 4rem"} />
+                            <Button text={"Enviar Código"} type={"submit"} pad={"1.5rem 4rem"} variant={"primary-btn"}/>
                         </div>
                     </>
                     :
@@ -80,7 +80,7 @@ export default function AuthenticateSMS({ onPress, onBack, onNavigate }) {
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
                             <p style={options.text}>Mensagem informado ao usuário que ele deve informar o código recebido via SMS.</p>
-                            <Button text={"Confirmar Código"} type={"submit"} pad={"1.5rem 4rem"} />
+                            <Button text={"Confirmar Código"} type={"submit"} pad={"1.5rem 4rem"} variant={"primary-btn"}/>
                         </div>
                     </>
                 }

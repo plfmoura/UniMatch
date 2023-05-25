@@ -1,5 +1,6 @@
 import React from 'react'
 import './lobby.css'
+import Button from '../../../components/Button'
 
 export default function Lobby({onPress}) {
 
@@ -10,9 +11,9 @@ export default function Lobby({onPress}) {
                 <h4>Junte-se a centenas de<br />estudantes e socialize!</h4>
             </div>
             <nav className='lobby-btn-navigation'>
-                <input type="button" value="Entrar com Google" />
-                <input type="button" value="Entrar com Facebook" />
-                <input type="button" value="Entrar com Celular" onClick={onPress} />
+                <Button variant={"primary-btn"} text={"Entrar com Google"}/>
+                <Button variant={"primary-btn"} text={"Entrar com Facebook"}/>
+                <Button variant={"primary-btn"} text={"Entrar com Celular"} onPress={onPress}/>
                 <a>Problemas para iniciar sessão?</a>
             </nav>
         </div>

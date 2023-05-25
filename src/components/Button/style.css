@@ -1,0 +1,26 @@
+.default-btn {
+    font-size: 14px;
+    text-transform: uppercase;
+    border-radius: 20px;
+    cursor: pointer;
+    text-align: center;
+    border: none
+}
+
+.primary-btn {
+    background: #333;
+    color: #fff;
+}
+
+.primary-btn:hover {
+    background: #111;
+}
+
+.secondary-btn {
+    background: #fff;
+    color: #333;
+}
+
+.secondary-btn:hover {
+    background: #eee;
+}
