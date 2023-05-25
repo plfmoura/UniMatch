@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Button from '../../../components/Button'
 import BackArrow from '../../../components/BackArrow'
 
-export default function AuthenticateSMS({ onPress, onBack }) {
+export default function AuthenticateSMS({ onPress, onBack, onNavigate }) {
     const [awaitResponse, setAwaitResponse] = useState(false)
 
     const options = {
@@ -47,6 +47,7 @@ export default function AuthenticateSMS({ onPress, onBack }) {
     const handleCheck = (e) => {
         e.preventDefault(e)
         console.log('O SMS é inválido!')
+        onNavigate()
     }
 
     return (

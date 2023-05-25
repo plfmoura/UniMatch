@@ -3,10 +3,12 @@ import AuthenticateSMS from './AuthenticateSMS'
 import AppLogo from '../../components/AppLogo'
 import Lobby from './Lobby'
 import Loading from '../../components/Loading'
+import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
     const [initialState, setInitialState] = useState(true)
     const [isLoading, setIsLoading] = useState(false)
+    const navigate = useNavigate()
 
     const handleSubmit = () => {
         setIsLoading(true)
@@ -28,7 +30,9 @@ export default function Login() {
                     :
                     <AuthenticateSMS
                         onPress={handleSubmit}
-                        onBack={() => setInitialState(true)} />
+                        onBack={() => setInitialState(true)}
+                        onNavigate={() => navigate("/register")}
+                    />
                 }
             </div>
         </>
