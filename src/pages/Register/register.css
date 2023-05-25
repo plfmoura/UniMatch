@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+.descriptionRegister {
+    height: 65px;
+    width: 246px;
+    left: 15px;
+    top: 174px;
+    border-radius: 0px;
+    text-align: center;
+}
+
+.description {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 580;
+    letter-spacing: -0.05em;
+}
