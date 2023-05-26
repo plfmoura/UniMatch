@@ -1,3 +1,6 @@
+# our ambiance variables 
+.env
+
 # Logs
 logs
 *.log

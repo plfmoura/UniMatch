@@ -1,29 +1,41 @@
 import React, { useState } from 'react'
-import AppLogo from '../../components/AppLogo'
 import AuthenticateSMS from './AuthenticateSMS'
-import Register from './register'
+import AppLogo from '../../components/AppLogo'
+import Lobby from './Lobby'
+import Loading from '../../components/Loading'
+import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
     const [initialState, setInitialState] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
+    const navigate = useNavigate()
 
     const handleSubmit = () => {
-        alert("SMS enviado!")
+        setIsLoading(true)
+        setTimeout(() => {
+            setIsLoading(false)
+        }, [2000])
     }
 
     return (
-        <div className='Login-container' style={options.container}>
-            <div style={options.logo_container}>
-                <AppLogo objectScale={"1.2"} objectName={true} />
+        <>
+            {isLoading && <Loading />}
+            <div className='Login-container' style={options.container}>
+                <div style={options.logo_container}>
+                    <AppLogo objectName={true} />
+                </div>
+                {initialState ?
+                    <Lobby
+                        onPress={() => setInitialState(false)} />
+                    :
+                    <AuthenticateSMS
+                        onPress={handleSubmit}
+                        onBack={() => setInitialState(true)}
+                        onNavigate={() => navigate("/register")}
+                    />
+                }
             </div>
-            {initialState ?
-                <Register
-                    onPress={() => setInitialState(false)} />
-                :
-                <AuthenticateSMS
-                    onPress={handleSubmit}
-                    onBack={() => setInitialState(true)} />
-            }
-        </div>
+        </>
     )
 }
 
