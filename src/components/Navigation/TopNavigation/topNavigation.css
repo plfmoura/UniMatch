@@ -1,0 +1,28 @@
+.Navigation-top-container {
+    width: 100vw;
+    height: 10%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navigation-top-content {
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+}
+
+.navigation-item {
+    font-size: 20vw;
+    color: #232323;
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+}

@@ -2,7 +2,7 @@ import React from 'react'
 import logo from '../../../public/vite.svg'
 import './appLogo.css'
 
-export default function AppLogo({ objectScale, objectName, animation }) {
+export default function AppLogo({ objectScale, objectName, nameScale, animation }) {
   let scale = objectScale ? objectScale : "1"
 
   const options = {
@@ -17,7 +17,7 @@ export default function AppLogo({ objectScale, objectName, animation }) {
       height: '50px'
     },
     text: {
-      fontSize: "28px",
+      fontSize: nameScale ? nameScale : "28px",
       fontWeight: '600',
       marginLeft: 2
     }
