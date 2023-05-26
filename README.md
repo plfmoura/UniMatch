@@ -32,4 +32,7 @@ Repositório Principal FRONT: <a href="https://github.com/plfmoura/match-app">Cl
 
 ### Contribuidores (em todas as dependências do projeto): 
 
+<a href="https://github.com/plfmoura/app-match/graphs/contributors" width="100%">
 <img src="https://contrib.rocks/image?repo=plfmoura/app-match" width="10%" /><img src="https://contrib.rocks/image?repo=Juanpi92/api_match" width="15%"/> 
+</a>
+
