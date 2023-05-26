@@ -30,3 +30,6 @@ Repositório Principal API: <a href="https://github.com/Juanpi92/api_uva_match">
 
 Repositório Principal FRONT: <a href="https://github.com/plfmoura/match-app">Clique aqui</a> 🟢
 
+### Contribuidores (em todas as dependências do projeto): 
+
+<img src="https://contrib.rocks/image?repo=plfmoura/app-match" width="10%" /><img src="https://contrib.rocks/image?repo=Juanpi92/api_match" width="15%"/> 
