@@ -12,7 +12,7 @@ function App() {
 
   return (
     <HashRouter>
-      {user ?
+      {/* {user ?
         <>
           <TopNavigation />
           <Routes>
@@ -20,12 +20,12 @@ function App() {
           </Routes>
           <BottomNavigation />
         </>
-        :
+        : */}
         <Routes>
           <Route exact path="/" element={<Login />}></Route>
           <Route exact path="/register" element={<Register />}></Route>
         </Routes>
-      }
+      {/* } */}
     </HashRouter>
   )
 }
