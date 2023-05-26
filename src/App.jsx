@@ -10,7 +10,7 @@ function App() {
 
   return (
     <HashRouter>
-      {user ?
+      {!user ?
         <Routes>
           <Route exact path="/" element={<Login />}></Route>
           <Route exact path="/register" element={<Register />}></Route>
