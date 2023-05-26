@@ -16,7 +16,6 @@
     gap: 3rem;
 }
 
-
 .descriptionRegister {
     display: flex;
     flex-direction: column;
@@ -45,11 +44,36 @@
     margin-bottom: 2rem;
 }
 
-.inputFile {
-    height: 265px;
-    background-color: #454545;
+.input-image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.inputFile {
+    display: none;
+}
+
+.label-input-file {
+    width: 230px;
+    height: 265px;
+    cursor: pointer;
+    position: relative;
+    z-index: 5;
+    display: grid;
+    place-content: center;
+    border-radius: 20px;
+    color: #fff;
+}
+
+.selected-image {
+    position: absolute;
+    z-index: 1;
+    width: 230px;
+    height: 265px;
+    object-fit: cover;
+    border-radius: 20px;
+}
 
 .inputTransparent {
     font-family: 'Inter', sans-serif;

@@ -6,6 +6,7 @@ import AppLogo from '../../components/AppLogo'
 export default function Register() {
   const [initialState, setInitialState] = useState(true)
   const [userName, setUserName] = useState()
+  const [userImage, setUserImage] = useState("")
 
   const form_store_name = useRef(null)
   const form_store_last = useRef(null)
@@ -56,11 +57,19 @@ export default function Register() {
         :
         <form className='formRegister' onSubmit={handleSubmit} ref={form_register}>
           <span className="descriptionRegister">
-            <p className="description">Já estamos quase lá, só mais esse detalhe aqui, {userName}</p>
-            <p className="description">vamos precisar de uma foto bem legal sua, capricha hein, ela será seu cartão de visitas...</p>
+            <p className="description">{userName}, já estamos quase lá, só mais esse detalhe aqui </p>
+            <p className="description">vamos precisar de uma foto bem legal sua, capricha hein, ela será seu cartão de visitas!</p>
           </span>
-          <div className="input-container">
-            <input className='inputFile' type="file"></input>
+          <div className="input-image-container">
+            <label
+              htmlFor="file"
+              className='label-input-file'
+              style={{ backgroundColor: userImage ? "#45454580" : "#454545" }}
+            >
+              {userImage ? "Alterar arquivo" : "Selecione arquivo"}
+            </label>
+            <img src={userImage ? URL.createObjectURL(userImage) : ""} alt="selected image" className='selected-image' />
+            <input className='inputFile' id='file' type="file" onChange={(e) => setUserImage(e.target.files[0])}></input>
           </div>
           <Button
             text={"CONTINUAR"}
