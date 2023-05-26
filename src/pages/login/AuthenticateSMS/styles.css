@@ -1,0 +1,65 @@
+
+.SMS-container {
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.sms-content {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+#select-country,
+#select-phone-number,
+#sms-return {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: #333;
+    text-align: center;
+    border-bottom: 1px solid #333;
+}
+
+#select-country {
+    width: 30%;
+}
+
+#select-country option {
+    background-color: #333;
+    color: #fff;
+    font-size: 10px;
+}
+
+#select-phone-number {
+    width: 70%;
+    letter-spacing: 3px;
+    text-align: left;
+    padding-left: 5px;
+}
+
+.terms-description {
+    font-size: 14px;
+    width: 300px;
+    text-align: justify;
+}
+
+#sms-return {
+    width: 160px;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 420px) {
+    .sms-content {
+        width: calc(200px + 20%);
+    }
+
+    .terms-description {
+        width: calc(200px + 20%);
+    }
+}

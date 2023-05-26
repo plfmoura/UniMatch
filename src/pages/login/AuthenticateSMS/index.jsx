@@ -1,91 +1,119 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Button from '../../../components/Button'
 import BackArrow from '../../../components/BackArrow'
+import './styles.css'
+import Loading from '../../../components/Loading'
 
 export default function AuthenticateSMS({ onPress, onBack, onNavigate }) {
     const [awaitResponse, setAwaitResponse] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const input_celRef = useRef(null)
+    const input_smsRef = useRef(null)
+
+    useEffect(() => {
+        // to put focus into input when component mount 
+        input_celRef.current && input_celRef.current.focus()
+        input_smsRef.current && input_smsRef.current.focus()
+    }, [awaitResponse])
 
     const options = {
-        container: {
-            height: '40%',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '1rem',
-            justifyContent: 'space-between'
-        },
-        content: {
-            display: 'flex',
-            gap: 10,
-        },
         input: {
-            background: 'transparent',
-            fontSize: !awaitResponse ? "1.13rem" : "2.5rem",
-            width: !awaitResponse ? null : "10rem",
-            outline: 'none',
-            border: 'none',
-            color: '#333',
-            borderBottom: '1px solid #333',
-            textAlign: !awaitResponse ? null : "center"
-        },
-        text: {
-            fontSize: '14px',
-            width: '80%',
-            textAlign: 'justify'
+            fontSize: !awaitResponse ? "1.3rem" : "3rem",
         },
     }
 
     const onSubmit = (e) => {
         e.preventDefault(e)
-        console.log('SMS enviado, verifique seu dispositivo')
-        setAwaitResponse(true)
+        let inputCel = input_celRef.current
 
-        // get onPress function 
-        onPress()
+        if (inputCel.value == "") {
+            inputCel.focus()
+            return
+        } else if (inputCel.value.length < 11) {
+            inputCel.focus()
+            return
+        } else {
+            console.log(`SMS enviado, para ${inputCel.value}`)
+            setAwaitResponse(true)
+            // get onPress function 
+            onPress()
+        }
     }
 
     const handleCheck = (e) => {
         e.preventDefault(e)
-        console.log('O SMS é inválido!')
-        onNavigate()
+
+        let inputSms = input_smsRef.current
+
+        if (inputSms.value == "") {
+            inputSms.focus()
+            return
+        } else if (inputSms.value.length < 4) {
+            inputSms.value = ""
+            inputSms.focus()
+            return
+        } else {
+            console.log(`O código ${inputSms.value} é válido!`)
+            inputSms.value = ""
+            setLoading(true)
+            setTimeout(() => {
+                setLoading(false)
+                onNavigate()
+            }, [2000])
+        }
     }
 
     return (
-        <>
-            <BackArrow onPress={onBack} />
-            <form onSubmit={!awaitResponse ? onSubmit : handleCheck} className='SMS-container' style={options.container}>
-                {!awaitResponse ?
-                    <>
-                        <div className='sms-content' style={options.content}>
-                            <select name="country" id="select-country" style={options.input}>
-                                <option value="default">BR +55</option>
-                                <option value="1">PT +300</option>
-                                <option value="2">USA +201</option>
-                            </select>
-                            <input style={options.input} type="text" id="select-phone-number" placeholder='Número de Telefone' />
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
-                            <p style={options.text}>Mensagem informado ao usuário que ele receberá um código via
-                                telefone para efetuar o cadastro. Mensagem informado ao usuário
-                                que ele receberá um código via telefone para efetuar o cadastro.
-                                Mensagem informado ao usuário que ele receberá um código via telefone
-                                para efetuar o cadastro.</p>
-                            <Button text={"Enviar Código"} type={"submit"} pad={"1.5rem 4rem"} variant={"primary-btn"}/>
-                        </div>
-                    </>
-                    :
-                    <>
-                        <div className='sms-content' style={options.content}>
-                            <input style={options.input} type="text" id="sms-return" maxLength={3} placeholder='* * *'/>
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
-                            <p style={options.text}>Mensagem informado ao usuário que ele deve informar o código recebido via SMS.</p>
-                            <Button text={"Confirmar Código"} type={"submit"} pad={"1.5rem 4rem"} variant={"primary-btn"}/>
-                        </div>
-                    </>
-                }
-                <a style={{ marginTop: '2rem', position: 'relative', bottom: -50 }} onClick={() => setAwaitResponse(false)}>Não recebeu nosso SMS?</a>
-            </form>
-        </>
+        <>{loading ? <Loading /> :
+            <>
+                <BackArrow onPress={onBack} />
+                <form onSubmit={!awaitResponse ? onSubmit : handleCheck} className='SMS-container'>
+                    {!awaitResponse ?
+                        <>
+                            <div className='sms-content'>
+                                <select name="country" id="select-country" style={options.input}>
+                                    <option value="default">+55</option>
+                                    <option value="1">+300</option>
+                                    <option value="2">+201</option>
+                                </select>
+                                <input
+                                    ref={input_celRef}
+                                    style={options.input}
+                                    type="tel"
+                                    id="select-phone-number"
+                                    placeholder='21 90000-0000'
+                                    maxLength={11}
+                                />
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
+                                <p className='terms-description'>Mensagem informado ao usuário que ele receberá um código via
+                                    telefone para efetuar o cadastro. Mensagem informado ao usuário
+                                    que ele receberá um código via telefone para efetuar o cadastro.
+                                    Mensagem informado ao usuário que ele receberá um código via telefone
+                                    para efetuar o cadastro.</p>
+                                <Button text={"Enviar Código"} type={"submit"} pad={"1.5rem 4rem"} variant={"primary-btn"} />
+                            </div>
+                        </>
+                        :
+                        <>
+                            <div className='sms-content'>
+                                <input
+                                    ref={input_smsRef}
+                                    style={options.input}
+                                    type="text"
+                                    id="sms-return"
+                                    maxLength={4}
+                                />
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
+                                <p className='terms-description'>Mensagem informado ao usuário que ele deve informar o código recebido via SMS.</p>
+                                <Button text={"Confirmar Código"} type={"submit"} pad={"1.5rem 4rem"} variant={"primary-btn"} />
+                            </div>
+                        </>
+                    }
+                    <a style={{ marginTop: '2rem', position: 'relative', bottom: -50 }} onClick={() => setAwaitResponse(false)}>Não recebeu nosso SMS?</a>
+                </form>
+            </>
+        }</>
     )
 }
