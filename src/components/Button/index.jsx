@@ -1,7 +1,7 @@
 import React from 'react'
 import './style.css'
 
-export default function Button({ onPress, text, type, pad, variant }) {
+export default function Button({ onPress, text, name, type, pad, variant, reference }) {
     const options = {
         style: {
             padding: pad ? pad : "1.5rem",
@@ -13,6 +13,6 @@ export default function Button({ onPress, text, type, pad, variant }) {
 // - primary - secondary - default
 
 return (
-    <input type={type ? type : "btn"} style={options.style} readOnly value={text ? text : "Meu botão"} onClick={onPress && onPress} className={"default-btn " + variant} />
+    <input ref={reference} name={name} type={type ? type : "btn"} style={options.style} readOnly value={text ? text : "Meu botão"} onClick={onPress && onPress} className={"default-btn " + variant} />
 )
 }
