@@ -63,7 +63,7 @@
     display: grid;
     place-content: center;
     border-radius: 20px;
-    color: #fff;
+    color: var(--primary-font-color);
 }
 
 .selected-image {
@@ -83,7 +83,13 @@
     outline: 0;
     font-size: 18px;
     text-align: center;
-    color: #333;
+    color: var(--primary-font-color);
     padding: 3px 0;
     background: transparent;
+}
+
+.inputTransparent option {
+    color: var(primary-font-color);
+    background-color: var(--primary-color);
+    font-size: 12px;
 }

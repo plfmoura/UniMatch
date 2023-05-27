@@ -1,5 +1,7 @@
-
 :root {
     --accent-word-color: #454545; 
-
+    --bg-color: #151515;
+    --primary-font-color: #fff;
+    --primary-color: #151515;
+    --secondary-color: #2ea9ff;
 }
