@@ -59,7 +59,7 @@ export default function AuthenticateSMS({ onPress, onBack, onNavigate }) {
             setTimeout(() => {
                 setLoading(false)
                 onNavigate()
-            }, [2000])
+            }, [5000])
         }
     }
 
