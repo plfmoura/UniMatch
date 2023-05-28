@@ -35,8 +35,6 @@ export default function AuthenticateSMS({ onPress, onBack, onNavigate }) {
         } else {
             console.log(`SMS enviado, para ${inputCel.value}`)
             setAwaitResponse(true)
-            // get onPress function 
-            onPress()
         }
     }
 

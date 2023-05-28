@@ -11,9 +11,11 @@
 .lobby-title {
     display: flex;
     flex-direction: column;
+    gap: .5rem;
     font-weight: 700;
     font-family: 'Inter', sans-serif;
-    font-size: 1.1rem;
+    position: relative;
+    top: -10%;
 }
 
 .lobby-title h4,
@@ -25,22 +27,22 @@
 .lobby-btn-navigation {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    margin-top: 2rem;
+    gap: 1.1rem;
 }
 
-.lobby-btn-navigation input {
-    padding: 1.5rem 2.8rem;
-    font-size: 16px;
-    text-transform: uppercase;
-    border-radius: 20px;
-    cursor: pointer;
+.lobby-btn-navigation button {
+    position: relative;
+    top: -4%;
 }
 
 .lobby-btn-navigation a {
     cursor: pointer;
 }
 
-.words-gray {
+.ornate-words {
     color: var(--accent-word-color);
+}
+
+@media screen and (max-width: 420px) {
+
 }

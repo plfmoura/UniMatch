@@ -12,11 +12,11 @@ export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
 
     useEffect(() => {
         // to put focus into input when component mount 
-        input_email.current && input_email.current.focus()
-        if(input_email_response.current){
-            input_email_response.current.focus();
-            input_email_response.current.value = ""
-        }
+            input_email.current && input_email.current.focus()
+            if(input_email_response.current){
+                input_email_response.current.focus();
+                input_email_response.current.value = ""
+            }
     }, [awaitResponse])
 
     const options = {
@@ -35,8 +35,6 @@ export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
         } else {
             console.log(`email enviado, para ${inputEmail.value}`)
             setAwaitResponse(true)
-            // get onPress function 
-            onPress()
         }
     }
 

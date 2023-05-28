@@ -37,24 +37,27 @@ export default function Register() {
           <input className='inputTransparent' ref={form_store_name} type="text" placeholder="Digite seu nome..."></input>
           <input className='inputTransparent' ref={form_store_last} type="text" placeholder="Aqui seu sobrenome..."></input>
           <input className='inputTransparent' ref={form_store_date} type="date" placeholder="Data de nascimento..."></input>
-          <select className='inputTransparent' ref={form_store_gender}>
-            <option value="Default">Qual é a sua identidade de gênero?</option>
-            <option value="male">Masculino</option>
-            <option value="female">Feminino</option>
-            <option value="nonbinary">Não-binário</option>
-            <option value="agender">Agênero</option>
-            <option value="genderqueer">Gênero Queer </option>
-            <option value="demigender">Demigênero </option>
-            <option value="genderfluid">Gênero fluido</option>
-            <option value="transgender">Transgênero s</option>
-            <option value="two-spirit">Dois Espíritos</option>
-            <option value="pangender">Pan-gênero</option>
-            <option value="neutrois">Neutrois</option>
-            <option value="intersex">Intersexual</option>
-            <option value="questioning">Explorando / Questionando </option>
-            <option value="other">Outro</option>
-            <option value="prefer not to say">Prefiro não dizer </option>
-          </select>
+          <div>
+            <label htmlFor="gender" className='input-gender-title'>Qual sua identidade de gênero?</label>
+            <select className='inputTransparent' ref={form_store_gender}>
+              <option value="Default">Selecione</option>
+              <option value="male">Masculino</option>
+              <option value="female">Feminino</option>
+              <option value="nonbinary">Não-binário</option>
+              <option value="agender">Agênero</option>
+              <option value="genderqueer">Gênero Queer </option>
+              <option value="demigender">Demigênero </option>
+              <option value="genderfluid">Gênero fluido</option>
+              <option value="transgender">Transgênero s</option>
+              <option value="two-spirit">Dois Espíritos</option>
+              <option value="pangender">Pan-gênero</option>
+              <option value="neutrois">Neutrois</option>
+              <option value="intersex">Intersexual</option>
+              <option value="questioning">Explorando / Questionando </option>
+              <option value="other">Outro</option>
+              <option value="prefer not to say">Prefiro não dizer </option>
+            </select>
+          </div>
         </div>
         <Button
           text={"CONTINUAR"}
