@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import './register.css'
 import Button from '../../components/Button'
 import AppLogo from '../../components/AppLogo'
+import { setWarning } from '../../services/usableFunctions'
 
 export default function Register() {
   const [initialState, setInitialState] = useState(true)
@@ -16,9 +17,32 @@ export default function Register() {
   const form_register = useRef(null)
 
   const storeData = (e) => {
-    setUserName(form_store_name.current.value)
-    setInitialState(false)
     e.preventDefault(e)
+    let name = form_store_name.current
+    let lastName = form_store_last.current
+    let date = form_store_date.current
+    let gender = form_store_gender.current
+
+    if (name.value === "") {
+      name.focus()
+      setWarning(name)
+      return
+    } else if (lastName.value === "") {
+      lastName.focus()
+      setWarning(lastName)
+      return
+    } else if (date.value === "") {
+      date.focus()
+      setWarning(date)
+      return
+    } else if (gender.value === "default") {
+      gender.focus()
+      setWarning(gender)
+      return
+    }
+    
+    setUserName(name.value)
+    setInitialState(false)
   }
 
   const handleSubmit = (e) => {
@@ -31,30 +55,33 @@ export default function Register() {
       <AppLogo objectName={true} />
       {initialState ? <form className='formRegister' onSubmit={storeData} >
         <span className="descriptionRegister">
-          <a className="description">Certo, vamos prosseguir com seu cadastro, vou precisar de algumas informações...</a>
+          <p className="description">Certo, vamos prosseguir com seu cadastro. Precisamos de algumas informações...</p>
         </span>
         <div className="input-container">
           <input className='inputTransparent' ref={form_store_name} type="text" placeholder="Digite seu nome..."></input>
           <input className='inputTransparent' ref={form_store_last} type="text" placeholder="Aqui seu sobrenome..."></input>
           <input className='inputTransparent' ref={form_store_date} type="date" placeholder="Data de nascimento..."></input>
-          <select className='inputTransparent' ref={form_store_gender}>
-            <option value="Default">Qual é a sua identidade de gênero?</option>
-            <option value="male">Masculino</option>
-            <option value="female">Feminino</option>
-            <option value="nonbinary">Não-binário</option>
-            <option value="agender">Agênero</option>
-            <option value="genderqueer">Gênero Queer </option>
-            <option value="demigender">Demigênero </option>
-            <option value="genderfluid">Gênero fluido</option>
-            <option value="transgender">Transgênero s</option>
-            <option value="two-spirit">Dois Espíritos</option>
-            <option value="pangender">Pan-gênero</option>
-            <option value="neutrois">Neutrois</option>
-            <option value="intersex">Intersexual</option>
-            <option value="questioning">Explorando / Questionando </option>
-            <option value="other">Outro</option>
-            <option value="prefer not to say">Prefiro não dizer </option>
-          </select>
+          <div>
+            <label htmlFor="gender" className='input-gender-title'>Qual sua identidade de gênero?</label>
+            <select className='inputTransparent' ref={form_store_gender}>
+              <option value="default">Selecione</option>
+              <option value="male">Masculino</option>
+              <option value="female">Feminino</option>
+              <option value="nonbinary">Não-binário</option>
+              <option value="agender">Agênero</option>
+              <option value="genderqueer">Gênero Queer </option>
+              <option value="demigender">Demigênero </option>
+              <option value="genderfluid">Gênero fluido</option>
+              <option value="transgender">Transgênero s</option>
+              <option value="two-spirit">Dois Espíritos</option>
+              <option value="pangender">Pan-gênero</option>
+              <option value="neutrois">Neutrois</option>
+              <option value="intersex">Intersexual</option>
+              <option value="questioning">Explorando / Questionando </option>
+              <option value="other">Outro</option>
+              <option value="prefer not to say">Prefiro não dizer </option>
+            </select>
+          </div>
         </div>
         <Button
           text={"CONTINUAR"}

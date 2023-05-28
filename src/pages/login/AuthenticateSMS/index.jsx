@@ -3,6 +3,7 @@ import Button from '../../../components/Button'
 import BackArrow from '../../../components/BackArrow'
 import './styles.css'
 import Loading from '../../../components/Loading'
+import { setWarning } from '../../../services/usableFunctions'
 
 export default function AuthenticateSMS({ onPress, onBack, onNavigate }) {
     const [awaitResponse, setAwaitResponse] = useState(false)
@@ -26,35 +27,29 @@ export default function AuthenticateSMS({ onPress, onBack, onNavigate }) {
         e.preventDefault(e)
         let inputCel = input_celRef.current
 
-        if (inputCel.value == "") {
+        if (inputCel.value == "" || inputCel.value.length < 11) {
             inputCel.focus()
-            return
-        } else if (inputCel.value.length < 11) {
-            inputCel.focus()
+            setWarning(inputCel)
             return
         } else {
             console.log(`SMS enviado, para ${inputCel.value}`)
             setAwaitResponse(true)
-            // get onPress function 
-            onPress()
         }
     }
 
     const handleCheck = (e) => {
         e.preventDefault(e)
-
         let inputSms = input_smsRef.current
 
-        if (inputSms.value == "") {
-            inputSms.focus()
-            return
-        } else if (inputSms.value.length < 4) {
+        if (inputSms.value == "" || inputSms.value.length < 4) {
             inputSms.value = ""
             inputSms.focus()
+            setWarning(inputSms)
             return
         } else {
             console.log(`O código ${inputSms.value} é válido!`)
             inputSms.value = ""
+            onPress()
             setLoading(true)
             setTimeout(() => {
                 setLoading(false)

@@ -3,6 +3,7 @@ import Button from '../../../components/Button'
 import BackArrow from '../../../components/BackArrow'
 import './styles.css'
 import Loading from '../../../components/Loading'
+import { setWarning } from '../../../services/usableFunctions'
 
 export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
     const [awaitResponse, setAwaitResponse] = useState(false)
@@ -12,11 +13,11 @@ export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
 
     useEffect(() => {
         // to put focus into input when component mount 
-        input_email.current && input_email.current.focus()
-        if(input_email_response.current){
-            input_email_response.current.focus();
-            input_email_response.current.value = ""
-        }
+            input_email.current && input_email.current.focus()
+            if(input_email_response.current){
+                input_email_response.current.focus();
+                input_email_response.current.value = ""
+            }
     }, [awaitResponse])
 
     const options = {
@@ -31,12 +32,11 @@ export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
 
         if (inputEmail.value == "") {
             inputEmail.focus()
+            setWarning(inputEmail)
             return
         } else {
             console.log(`email enviado, para ${inputEmail.value}`)
             setAwaitResponse(true)
-            // get onPress function 
-            onPress()
         }
     }
 
@@ -55,6 +55,7 @@ export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
         } else {
             console.log(`O código ${inputResponse.value} é válido!`)
             inputResponse.value = ""
+            onPress()
             setLoading(true)
             setTimeout(() => {
                 setLoading(false)

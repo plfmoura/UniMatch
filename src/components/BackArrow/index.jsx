@@ -1,6 +1,5 @@
 import React from 'react'
 import { IoIosArrowBack } from "react-icons/io";
-import { useNavigate } from 'react-router-dom';
 
 export default function BackArrow({color, size, top, left, onPress}) {
     

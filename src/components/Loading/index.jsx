@@ -9,7 +9,6 @@ export default function Loading() {
   useEffect(() => {
     let index = Math.floor(Math.random() * LoadingInfo.length)
     setMessage(LoadingInfo[index])
-    console.log(index)
   },[])
   
   return (
