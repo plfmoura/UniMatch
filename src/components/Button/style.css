@@ -6,7 +6,6 @@ button {
 
 .default-btn {
     font-size: 16px;
-    font-size: 16px;
     text-transform: uppercase;
     border-radius: 20px;
     cursor: pointer;
@@ -17,18 +16,13 @@ button {
 .primary-btn {
     color: var(--primary-font-color);
     background-color: var(--primary-button-color);
-    color: var(--primary-font-color);
-    background-color: var(--primary-button-color);
 }
 
 .primary-btn:hover {
     background: var(--primary-button-color-hover);
-    background: var(--primary-button-color-hover);
 }
 
 .secondary-btn {
-    background: var(--secondary-button-color);
-    color: var(--primary-font-color);
     background: var(--secondary-button-color);
     color: var(--primary-font-color);
 }
@@ -44,7 +38,6 @@ button {
 
 .dark-btn:hover {
     background: var(--dark-button-color-hover);
-    background: var(--secondary-button-color-hover);
 }
 
 .dark-btn {
