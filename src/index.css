@@ -1,5 +1,18 @@
-
 :root {
-    --accent-word-color: #454545; 
+    --accent-word-color: #FF453C; 
+    --bg-color: #151515;
+    --primary-font-color: #fff;
+    --primary-color: #151515;
+    --secondary-color: #2ea9ff;
+    --primary-button-color: #22B1EE;
+    --primary-button-color-hover: #0d8dc4;
+    --secondary-button-color: #FF453C;
+    --secondary-button-color-hover: #d33129; 
+    --dark-button-color: #454545;
+    --dark-button-color-hover: #272727;
+    --link-color: #0085FF;
+}
 
+a {
+    color: var(--link-color);
 }

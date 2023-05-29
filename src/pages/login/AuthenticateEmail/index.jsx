@@ -5,16 +5,19 @@ import './styles.css'
 import Loading from '../../../components/Loading'
 import { setWarning } from '../../../services/usableFunctions'
 
-export default function AuthenticateSMS({ onPress, onBack, onNavigate }) {
+export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
     const [awaitResponse, setAwaitResponse] = useState(false)
     const [loading, setLoading] = useState(false)
-    const input_celRef = useRef(null)
-    const input_smsRef = useRef(null)
+    const input_email = useRef(null)
+    const input_email_response = useRef(null)
 
     useEffect(() => {
         // to put focus into input when component mount 
-        input_celRef.current && input_celRef.current.focus()
-        input_smsRef.current && input_smsRef.current.focus()
+            input_email.current && input_email.current.focus()
+            if(input_email_response.current){
+                input_email_response.current.focus();
+                input_email_response.current.value = ""
+            }
     }, [awaitResponse])
 
     const options = {
@@ -25,30 +28,33 @@ export default function AuthenticateSMS({ onPress, onBack, onNavigate }) {
 
     const onSubmit = (e) => {
         e.preventDefault(e)
-        let inputCel = input_celRef.current
+        let inputEmail = input_email.current
 
-        if (inputCel.value == "" || inputCel.value.length < 11) {
-            inputCel.focus()
-            setWarning(inputCel)
+        if (inputEmail.value == "") {
+            inputEmail.focus()
+            setWarning(inputEmail)
             return
         } else {
-            console.log(`SMS enviado, para ${inputCel.value}`)
+            console.log(`email enviado, para ${inputEmail.value}`)
             setAwaitResponse(true)
         }
     }
 
     const handleCheck = (e) => {
         e.preventDefault(e)
-        let inputSms = input_smsRef.current
 
-        if (inputSms.value == "" || inputSms.value.length < 4) {
-            inputSms.value = ""
-            inputSms.focus()
-            setWarning(inputSms)
+        let inputResponse = input_email_response.current
+
+        if (inputResponse.value == "") {
+            inputResponse.focus()
+            return
+        } else if (inputResponse.value.length < 4) {
+            inputResponse.value = ""
+            inputResponse.focus()
             return
         } else {
-            console.log(`O código ${inputSms.value} é válido!`)
-            inputSms.value = ""
+            console.log(`O código ${inputResponse.value} é válido!`)
+            inputResponse.value = ""
             onPress()
             setLoading(true)
             setTimeout(() => {
@@ -62,22 +68,16 @@ export default function AuthenticateSMS({ onPress, onBack, onNavigate }) {
         <>{loading ? <Loading /> :
             <>
                 <BackArrow onPress={onBack} />
-                <form onSubmit={!awaitResponse ? onSubmit : handleCheck} className='SMS-container'>
+                <form onSubmit={!awaitResponse ? onSubmit : handleCheck} className='Email-container'>
                     {!awaitResponse ?
                         <>
-                            <div className='sms-content'>
-                                <select name="country" id="select-country" style={options.input}>
-                                    <option value="default">+55</option>
-                                    <option value="1">+300</option>
-                                    <option value="2">+201</option>
-                                </select>
+                            <div className='email-content'>
                                 <input
-                                    ref={input_celRef}
+                                    ref={input_email}
                                     style={options.input}
-                                    type="tel"
-                                    id="select-phone-number"
-                                    placeholder='21 90000-0000'
-                                    maxLength={11}
+                                    type="email"
+                                    id="select-email"
+                                    placeholder='Insira seu email'
                                 />
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
@@ -86,27 +86,27 @@ export default function AuthenticateSMS({ onPress, onBack, onNavigate }) {
                                     que ele receberá um código via telefone para efetuar o cadastro.
                                     Mensagem informado ao usuário que ele receberá um código via telefone
                                     para efetuar o cadastro.</p>
-                                <Button text={"Enviar SMS"} type={"submit"} pad={"1.5rem 4rem"} variant={"primary-btn"} />
+                                <Button text={"Enviar Email"} type={"submit"} pad={"1.5rem 4rem"} variant={"primary-btn"} />
                             </div>
                         </>
                         :
                         <>
-                            <div className='sms-content'>
+                            <div className='email-content'>
                                 <input
-                                    ref={input_smsRef}
+                                    ref={input_email_response}
                                     style={options.input}
                                     type="text"
-                                    id="sms-return"
+                                    id="email-return"
                                     maxLength={4}
                                 />
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
-                                <p className='terms-description'>Mensagem informado ao usuário que ele deve informar o código recebido via SMS.</p>
+                                <p className='terms-description'>Mensagem informado ao usuário que ele deve informar o código recebido via email.</p>
                                 <Button text={"Confirmar Código"} type={"submit"} pad={"1.5rem 4rem"} variant={"primary-btn"} />
                             </div>
                         </>
                     }
-                    <a style={{ marginTop: '2rem', position: 'relative', bottom: -50 }} onClick={() => setAwaitResponse(false)}>Não recebeu nosso SMS?</a>
+                    <a style={{ marginTop: '2rem', position: 'relative', bottom: -50 }} onClick={() => setAwaitResponse(false)}>Não recebeu nosso email?</a>
                 </form>
             </>
         }</>

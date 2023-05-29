@@ -1,5 +1,11 @@
+button {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+}
+
 .default-btn {
-    font-size: 14px;
+    font-size: 16px;
     text-transform: uppercase;
     border-radius: 20px;
     cursor: pointer;
@@ -8,19 +14,37 @@
 }
 
 .primary-btn {
-    background: #333;
-    color: #fff;
+    color: var(--primary-font-color);
+    background-color: var(--primary-button-color);
 }
 
 .primary-btn:hover {
-    background: #111;
+    background: var(--primary-button-color-hover);
 }
 
 .secondary-btn {
-    background: #fff;
-    color: #333;
+    background: var(--secondary-button-color);
+    color: var(--primary-font-color);
 }
 
 .secondary-btn:hover {
-    background: #eee;
+    background: var(--secondary-button-color-hover);
+}
+
+.dark-btn {
+    background: var(--dark-button-color);
+    color: var(--primary-font-color);
+}
+
+.dark-btn:hover {
+    background: var(--dark-button-color-hover);
+}
+
+.dark-btn {
+    background: var(--dark-button-color);
+    color: var(--primary-font-color);
+}
+
+.dark-btn:hover {
+    background: var(--dark-button-color-hover);
 }
