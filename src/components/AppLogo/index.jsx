@@ -10,8 +10,8 @@ export default function AppLogo({ objectScale, objectName, nameScale, animation 
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      flexDirection: 'column',
       gap: 10,
-      flexDirection: 'column'
     },
     logo: {
       transform: `scale(${scale})`,
