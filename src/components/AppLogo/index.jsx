@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../../../public/vite.svg'
+import logo from '../../assets/images/logo.png'
 import './appLogo.css'
 
 export default function AppLogo({ objectScale, objectName, nameScale, animation }) {
@@ -9,15 +9,16 @@ export default function AppLogo({ objectScale, objectName, nameScale, animation 
     container: {
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      gap: 10,
+      flexDirection: 'column'
     },
     logo: {
       transform: `scale(${scale})`,
-      width: '50px',
-      height: '50px'
+      height: '50px',
     },
     text: {
-      fontSize: nameScale ? nameScale : "28px",
+      fontSize: nameScale ? nameScale : "22px",
       fontWeight: '600',
       marginLeft: 2
     }
@@ -30,7 +31,7 @@ export default function AppLogo({ objectScale, objectName, nameScale, animation 
         alt="Logo do aplicativo"
         style={options.logo}
         className={animation ? 'logo-animation' : null} />
-      {objectName ? <span style={options.text}>Match App</span> : null}
+      {objectName ? <span style={options.text}>UniMatch</span> : null}
     </div>
   )
 
