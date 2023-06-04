@@ -19,6 +19,7 @@ export default function Login() {
 
     const handleSelected = (e) => {
         e.preventDefault(e)
+        console.log(e.target.name)
         if (e.target.name === "sms") {
             setInitialState(false)
             setSelectedAuth(
