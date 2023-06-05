@@ -10,8 +10,15 @@
 .email-content {
     width: 300px;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     gap: 10px;
+}
+
+.email-content span {
+    position: relative;
+    top: -100%;
+    color: #f00;
 }
 
 #select-email,
