@@ -23,7 +23,7 @@ export default function AuthenticateSMS({ onPress, onBack, onNavigate }) {
         },
     }
 
-    const onSubmit = (e) => {
+    const sendResponse = (e) => {
         e.preventDefault(e)
         let inputCel = input_celRef.current
 
@@ -32,6 +32,18 @@ export default function AuthenticateSMS({ onPress, onBack, onNavigate }) {
             setWarning(inputCel)
             return
         } else {
+
+            // const options = {
+            //     method: "POST",
+            //     url: `${import.meta.env.VITE_BASE_URL}/`,
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            //     data: {
+            //         tel: inputCel.value,
+            //     }
+            // };
+
             console.log(`SMS enviado, para ${inputCel.value}`)
             setAwaitResponse(true)
         }
@@ -62,7 +74,7 @@ export default function AuthenticateSMS({ onPress, onBack, onNavigate }) {
         <>{loading ? <Loading /> :
             <>
                 <BackArrow onPress={onBack} />
-                <form onSubmit={!awaitResponse ? onSubmit : handleCheck} className='SMS-container'>
+                <form onSubmit={!awaitResponse ? sendResponse : handleCheck} className='SMS-container'>
                     {!awaitResponse ?
                         <>
                             <div className='sms-content'>

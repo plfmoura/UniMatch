@@ -34,7 +34,7 @@ export default function Login() {
             setSelectedAuth(
                 <AuthenticateEmail
                     onBack={() => setInitialState(true)}
-                    onNavigate={() => navigate("/register")}
+                    onNavigate={(target) => navigate(`/${target}`)}
                     onPress={() => setLogoController(false)}
                 />
             )
