@@ -6,15 +6,17 @@ import Loading from '../../../components/Loading'
 import { setWarning } from '../../../services/usableFunctions'
 import axios from 'axios'
 import Spinner from '../../../components/Spinner'
+import { useDispatch } from 'react-redux'
+import { setUser } from '../../../reducer/userReducer'
 
 export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
     const [awaitResponse, setAwaitResponse] = useState(false)
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState("")
-    const input_email = useRef(null)
-    const input_email_response = useRef(null)
     const [requestLoading, setRequestLoading] = useState(false)
     const [requestStatus, setRequestStatus] = useState(false)
+    const input_email = useRef(null)
+    const input_email_response = useRef(null)
 
     useEffect(() => {
         // to put focus into input when component mount 
@@ -57,6 +59,7 @@ export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
                     setEmail(inputEmail.value)
                     setAwaitResponse(true)
                     setRequestLoading(false)
+                    localStorage.removeItem("uni-match-user");
                 })
                 .catch(function (error) {
                     // console.error(error);
@@ -92,15 +95,13 @@ export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
             axios.request(options)
                 .then(function (response) {
                     let status = response.status
-                    console.log(status);
+                    console.log(response)
                     inputResponse.value = ""
                     onPress()
                     setLoading(true)
                     setTimeout(() => {
                         setLoading(false)
                         if (status === 202) {
-                            onNavigate("register")
-                        } else if (status === 403){
                             onNavigate("register")
                         } else if (status === 200) {
                             onNavigate("lounge")
@@ -110,7 +111,6 @@ export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
                     }, [5000])
                 })
                 .catch(function (error) {
-                    console.error(error);
                     if (error.response.status === 400) {
                         inputResponse.value = ""
                         setAwaitResponse(false)
@@ -118,6 +118,11 @@ export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
                         setTimeout(() => {
                             setRequestStatus(false)
                         }, [3000])
+                    } else if (error.response.status === 403) {
+                        let user = error.response.data
+                        localStorage.setItem("uni-match-user", JSON.stringify(user))
+                        onNavigate("register")
+                        // console.log(error.response.data)
                     }
                     setRequestLoading(false)
                 });
@@ -132,7 +137,7 @@ export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
                     {!awaitResponse ?
                         <>
                             <div className='email-content'>
-                                {requestStatus && <span>Código expirado, envie novamente!</span>}
+                                {requestStatus && <span>Código inválido ou expirado!</span>}
                                 <input
                                     ref={input_email}
                                     style={options.input}
