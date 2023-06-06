@@ -8,12 +8,14 @@ import { setUser } from '../../reducer/userReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { RegisterContext } from '../../contexts/RegisterContext'
 import { useNavigate } from 'react-router-dom'
+import Spinner from '../../components/Spinner'
 
 export default function Register() {
   const [initialState, setInitialState] = useState(true);
   const [userName, setUserName] = useState();
   const [userImage, setUserImage] = useState("");
   const [userId, setUserId] = useState(null)
+  const [requestLoading, setRequestLoading] = useState(false)
 
   const navigate = useNavigate()
 
@@ -21,7 +23,7 @@ export default function Register() {
   const state = useSelector((state) => state);
   const { user } = state.user;
 
-  const { setAlreadyRegistered } = useContext(RegisterContext)
+  const { setAlreadyRegistered, setShowLoading } = useContext(RegisterContext)
 
   const form_store_name = useRef(null);
   const form_store_last = useRef(null);
@@ -33,10 +35,11 @@ export default function Register() {
   useEffect(() => {
     getData()
     // alreadyRegistered ? setInitialState(false) : setInitialState(true)
+    setRequestLoading(false)
   }, []);
 
   useEffect(() => {
-    if(user){
+    if (user) {
       console.log(user)
       setUserName(user.name)
       setUserId(user._id)
@@ -52,11 +55,12 @@ export default function Register() {
       // to put user name into second register view 
       setAlreadyRegistered(true)
       setInitialState(false)
-    } 
+    }
   }
 
   const storeData = (e) => {
     e.preventDefault(e)
+
     let name = form_store_name.current
     let lastName = form_store_last.current
     let date = form_store_date.current
@@ -80,6 +84,7 @@ export default function Register() {
       setWarning(gender)
       return
     } else {
+      setRequestLoading(true)
       const options = {
         method: "POST",
         url: `${import.meta.env.VITE_BASE_URL}/register_part1`,
@@ -99,10 +104,13 @@ export default function Register() {
         .then(function (response) {
           setUserId(response.data.id)
           setUserName(name.value)
-          setInitialState(false)
+          setTimeout(() => {
+            setRequestLoading(false)
+            setInitialState(false)
+          }, [2000])
         })
         .catch(function (error) {
-          console.error(error);
+          setRequestLoading(false)
         });
     }
   }
@@ -111,6 +119,7 @@ export default function Register() {
     e.preventDefault(e)
     let imageFormated = new FormData();
     imageFormated.append("image", userImage);
+    setRequestLoading(true)
 
     const options = {
       method: "PATCH",
@@ -122,11 +131,16 @@ export default function Register() {
     };
     axios.request(options)
       .then(function (response) {
-        console.log(response)
+        setRequestLoading(true)
         navigate("/lounge")
+        // to show loading screen after enter into lounge page 
+        setShowLoading(true)
+        setTimeout(() => {
+          setShowLoading(false)
+        }, [4000])
       })
       .catch(function (error) {
-        console.error(error);
+        setRequestLoading(false)
       });
   }
 
@@ -171,12 +185,13 @@ export default function Register() {
             </select>
           </div>
         </div>
-        <Button
-          text={"CONTINUAR"}
-          type={"submit"}
-          variant={"primary-btn"}
-          pad={"1.5rem 4rem"}
-        />
+        {requestLoading ?
+          <Spinner /> : <Button
+            text={"CONTINUAR"}
+            type={"submit"}
+            variant={"primary-btn"}
+            pad={"1.5rem 4rem"}
+          />}
       </form>
         :
         <form className='formRegister' onSubmit={handleSubmit} ref={form_register}>
@@ -195,12 +210,13 @@ export default function Register() {
             <img src={userImage ? URL.createObjectURL(userImage) : ""} alt="" className='selected-image' />
             <input className='inputFile' id='file' type="file" onChange={(e) => setUserImage(e.target.files[0])}></input>
           </div>
-          <Button
-            text={"CONTINUAR"}
-            type={"submit"}
-            pad={"1.5rem 4rem"}
-            variant={"primary-btn"}
-          />
+          {requestLoading ?
+            <Spinner /> : <Button
+              text={"CONTINUAR"}
+              type={"submit"}
+              pad={"1.5rem 4rem"}
+              variant={"primary-btn"}
+            />}
         </form>}
     </div>
   )

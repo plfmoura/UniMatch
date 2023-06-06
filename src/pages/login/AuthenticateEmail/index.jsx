@@ -58,14 +58,12 @@ export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
             };
             axios.request(options)
                 .then(function (response) {
-                    // console.log(response.data);
                     setEmail(inputEmail.value)
                     setAwaitResponse(true)
                     setRequestLoading(false)
                     dispatch(removeUser())
                 })
                 .catch(function (error) {
-                    // console.error(error);
                     setRequestLoading(false)
                 });
         }
@@ -98,7 +96,6 @@ export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
             axios.request(options)
                 .then(function (response) {
                     let status = response.status
-                    console.log(response)
                     inputResponse.value = ""
                     onPress()
                     setLoading(true)
@@ -108,7 +105,9 @@ export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
                             onNavigate("register")
                             setAlreadyRegistered(false)
                         } else if (status === 200) {
-                            onNavigate("lounge")
+                            onNavigate("lounge");
+                            let user = response.data
+                            localStorage.setItem("uni-match-user", JSON.stringify(user));
                         }
                         //tenho que ver qual código está retornando
                         //403 - 202 - 200 
@@ -125,8 +124,12 @@ export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
                     } else if (error.response.status === 403) {
                         let user = error.response.data
                         localStorage.setItem("uni-match-user", JSON.stringify(user))
-                        onNavigate("register")
-                        setAlreadyRegistered(true)
+                        setLoading(true)
+                        setTimeout(() => {
+                            setLoading(false)
+                            onNavigate("register")
+                            setAlreadyRegistered(true)
+                        }, [5000])
                     }
                     setRequestLoading(false)
                 });
