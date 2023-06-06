@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Button from '../../../components/Button'
 import BackArrow from '../../../components/BackArrow'
 import './styles.css'
@@ -6,15 +6,20 @@ import Loading from '../../../components/Loading'
 import { setWarning } from '../../../services/usableFunctions'
 import axios from 'axios'
 import Spinner from '../../../components/Spinner'
+import { useDispatch } from 'react-redux'
+import { removeUser } from '../../../reducer/userReducer'
+import { RegisterContext } from '../../../contexts/RegisterContext'
 
 export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
     const [awaitResponse, setAwaitResponse] = useState(false)
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState("")
-    const input_email = useRef(null)
-    const input_email_response = useRef(null)
     const [requestLoading, setRequestLoading] = useState(false)
     const [requestStatus, setRequestStatus] = useState(false)
+    const input_email = useRef(null)
+    const input_email_response = useRef(null)
+    const { setAlreadyRegistered } = useContext(RegisterContext)
+    const dispatch = useDispatch();
 
     useEffect(() => {
         // to put focus into input when component mount 
@@ -43,7 +48,7 @@ export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
             setRequestLoading(true)
             const options = {
                 method: "POST",
-                url: `${import.meta.env.VITE_BASE_URL}/send_email`,
+                url: `${import.meta.env.VITE_BASE_URL}/send_code`,
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -57,6 +62,7 @@ export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
                     setEmail(inputEmail.value)
                     setAwaitResponse(true)
                     setRequestLoading(false)
+                    dispatch(removeUser())
                 })
                 .catch(function (error) {
                     // console.error(error);
@@ -80,7 +86,7 @@ export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
             setRequestLoading(true)
             const options = {
                 method: "POST",
-                url: `${import.meta.env.VITE_BASE_URL}/check_email`,
+                url: `${import.meta.env.VITE_BASE_URL}/check_code`,
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -92,7 +98,7 @@ export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
             axios.request(options)
                 .then(function (response) {
                     let status = response.status
-                    console.log(status);
+                    console.log(response)
                     inputResponse.value = ""
                     onPress()
                     setLoading(true)
@@ -100,8 +106,7 @@ export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
                         setLoading(false)
                         if (status === 202) {
                             onNavigate("register")
-                        } else if (status === 403){
-                            onNavigate("register")
+                            setAlreadyRegistered(false)
                         } else if (status === 200) {
                             onNavigate("lounge")
                         }
@@ -110,7 +115,6 @@ export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
                     }, [5000])
                 })
                 .catch(function (error) {
-                    console.error(error);
                     if (error.response.status === 400) {
                         inputResponse.value = ""
                         setAwaitResponse(false)
@@ -118,6 +122,11 @@ export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
                         setTimeout(() => {
                             setRequestStatus(false)
                         }, [3000])
+                    } else if (error.response.status === 403) {
+                        let user = error.response.data
+                        localStorage.setItem("uni-match-user", JSON.stringify(user))
+                        onNavigate("register")
+                        setAlreadyRegistered(true)
                     }
                     setRequestLoading(false)
                 });
@@ -132,7 +141,7 @@ export default function AuthenticateEmail({ onPress, onBack, onNavigate }) {
                     {!awaitResponse ?
                         <>
                             <div className='email-content'>
-                                {requestStatus && <span>Código expirado, envie novamente!</span>}
+                                {requestStatus && <span>Código inválido ou expirado!</span>}
                                 <input
                                     ref={input_email}
                                     style={options.input}
