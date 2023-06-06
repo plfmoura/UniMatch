@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useContext, useEffect, useRef, useState } from 'react'
+=======
+import React, { useEffect, useRef, useState } from 'react'
+>>>>>>> 46ae7041ad74d2a8b5736868cf9cd247f23465e1
 import './register.css'
 import Button from '../../components/Button'
 import AppLogo from '../../components/AppLogo'
@@ -6,14 +10,18 @@ import { setWarning } from '../../services/usableFunctions'
 import axios from 'axios'
 import { setUser } from '../../reducer/userReducer'
 import { useDispatch, useSelector } from 'react-redux'
+<<<<<<< HEAD
 import { RegisterContext } from '../../contexts/RegisterContext'
 import { useNavigate } from 'react-router-dom'
 import Spinner from '../../components/Spinner'
+=======
+>>>>>>> 46ae7041ad74d2a8b5736868cf9cd247f23465e1
 
 export default function Register() {
   const [initialState, setInitialState] = useState(true);
   const [userName, setUserName] = useState();
   const [userImage, setUserImage] = useState("");
+<<<<<<< HEAD
   const [userId, setUserId] = useState(null)
   const [requestLoading, setRequestLoading] = useState(false)
 
@@ -56,6 +64,27 @@ export default function Register() {
       setAlreadyRegistered(true)
       setInitialState(false)
     }
+=======
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+  const { user } = state.user;
+
+  const form_store_name = useRef(null);
+  const form_store_last = useRef(null);
+  const form_store_date = useRef(null);
+  const form_store_gender = useRef(null);
+
+  const form_register = useRef(null);
+
+
+  useEffect(() => {
+    getData()
+  }, []);
+
+  const getData = () => {
+    let user = JSON.parse(localStorage.getItem('uni-match-user'))
+    dispatch(setUser(user))
+>>>>>>> 46ae7041ad74d2a8b5736868cf9cd247f23465e1
   }
 
   const storeData = (e) => {
@@ -84,6 +113,7 @@ export default function Register() {
       setWarning(gender)
       return
     } else {
+<<<<<<< HEAD
       setRequestLoading(true)
       const options = {
         method: "POST",
@@ -112,11 +142,38 @@ export default function Register() {
         .catch(function (error) {
           setRequestLoading(false)
         });
+=======
+      // const options = {
+      //   method: "PATCH ",
+      //   url: `${import.meta.env.VITE_BASE_URL}/register_part1`,
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   data: {
+      //     email: "plfmoura96@gmail.com",
+      //     phone: "21983652965",
+      //     name: `${name.value}`,
+      //     lastName: `${lastName.value}`,
+      //     birth_date: 0,
+      //     gender: `${gender.value}`,
+      //   }
+      // };
+      // axios.request(options)
+      //   .then(function (response) {
+      //     console.log(response)
+      //     setUserName(name.value)
+      //     setInitialState(false)
+      //   })
+      //   .catch(function (error) {
+      //     console.error(error);
+      //   });
+>>>>>>> 46ae7041ad74d2a8b5736868cf9cd247f23465e1
     }
   }
 
   const handleSubmit = (e) => {
     e.preventDefault(e)
+<<<<<<< HEAD
     let imageFormated = new FormData();
     imageFormated.append("image", userImage);
     setRequestLoading(true)
@@ -142,6 +199,9 @@ export default function Register() {
       .catch(function (error) {
         setRequestLoading(false)
       });
+=======
+    setInitialState(true)
+>>>>>>> 46ae7041ad74d2a8b5736868cf9cd247f23465e1
   }
 
   const checkDefaultValues = (check) => {
@@ -160,8 +220,13 @@ export default function Register() {
           <p className="description">Certo, vamos prosseguir com seu cadastro. Precisamos de algumas informações...</p>
         </span>
         <div className="input-container">
+<<<<<<< HEAD
           <input className='inputTransparent' defaultValue={user && checkDefaultValues(user.name)} ref={form_store_name} type="text" placeholder="Digite seu nome..."></input>
           <input className='inputTransparent' defaultValue={user && checkDefaultValues(user.lastName)} ref={form_store_last} type="text" placeholder="Aqui seu sobrenome..."></input>
+=======
+          <input className='inputTransparent' defaultValue={checkDefaultValues(user.name)} ref={form_store_name} type="text" placeholder="Digite seu nome..."></input>
+          <input className='inputTransparent' defaultValue={checkDefaultValues(user.lastName)} ref={form_store_last} type="text" placeholder="Aqui seu sobrenome..."></input>
+>>>>>>> 46ae7041ad74d2a8b5736868cf9cd247f23465e1
           <input className='inputTransparent' ref={form_store_date} type="date" ></input>
           <div>
             <label htmlFor="gender" className='input-gender-title'>Qual sua identidade de gênero?</label>
