@@ -21,7 +21,7 @@ export default function Register() {
   const state = useSelector((state) => state);
   const { user } = state.user;
 
-  const { alreadyRegistered, setAlreadyRegistered } = useContext(RegisterContext)
+  const { setAlreadyRegistered } = useContext(RegisterContext)
 
   const form_store_name = useRef(null);
   const form_store_last = useRef(null);
@@ -35,21 +35,24 @@ export default function Register() {
     // alreadyRegistered ? setInitialState(false) : setInitialState(true)
   }, []);
 
+  useEffect(() => {
+    if(user){
+      console.log(user)
+      setUserName(user.name)
+      setUserId(user._id)
+    }
+  }, [user]);
+
   const getData = () => {
-    let user
+    let storageUser
     // to get data from 403 response 
     if (JSON.parse(localStorage.getItem('uni-match-user'))) {
-      user = JSON.parse(localStorage.getItem('uni-match-user'))
-      dispatch(setUser(user))
+      storageUser = JSON.parse(localStorage.getItem('uni-match-user'))
+      dispatch(setUser(storageUser))
       // to put user name into second register view 
-      setUserName(user.name && user.name)
-      setUserId(user._id)
       setAlreadyRegistered(true)
       setInitialState(false)
-      console.log(user)
-    } else {
-      null
-    }
+    } 
   }
 
   const storeData = (e) => {
@@ -106,18 +109,16 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault(e)
-    console.log(userId)
-    console.log(userImage)
+    let imageFormated = new FormData();
+    imageFormated.append("image", userImage);
+
     const options = {
       method: "PATCH",
       url: `${import.meta.env.VITE_BASE_URL}/register_part2/${userId}`,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'multipart/form-data; boundary=---011000010111000001101001',
       },
-      data: {
-        id_user: `${userId}`,
-        image: userImage
-      }
+      data: imageFormated
     };
     axios.request(options)
       .then(function (response) {
