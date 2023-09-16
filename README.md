@@ -20,6 +20,10 @@ projetos acadêmicos e até mesmo futuras oportunidades profissionais.
   
 </div>
 
+<div align="center">
+  <img src="./public/app-home.png" height="400px" />
+</div>
+
 Esta Aplicação *Web* está sendo desenvolvida para dispositivos com tela **(380x800 Mobile)** 🟡
 
 Design das Wireframes (FIGMA): <a href="https://www.figma.com/file/vdgJqeTlBXJYXx35ed9ZYC/Match-App?type=design&node-id=0%3A1&t=2QPbog0MAznD5Xv0-1">Clique aqui</a> 🟢
