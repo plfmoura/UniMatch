@@ -21,11 +21,11 @@ projetos acadêmicos e até mesmo futuras oportunidades profissionais.
 </div>
 
 <div align="center">
-  <img src="./public/home.png" height="400px" />
-  <img src="./public/cel-screen.png" height="400px" />
-  <img src="./public/code.png" height="400px" />
-  <img src="./public/loading.png" height="400px" />
-  <img src="./public/register.png" height="400px" />
+  <img src="./public/home.png" height="300px" />
+  <img src="./public/cel-screen.png" height="300px" />
+  <img src="./public/code.png" height="300px" />
+  <img src="./public/loading.png" height="300px" />
+  <img src="./public/register.png" height="300px" />
 </div>
 
 Esta Aplicação *Web* está sendo desenvolvida para dispositivos com tela **(380x800 Mobile)** 🟡
